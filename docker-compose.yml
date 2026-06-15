@@ -1,0 +1,13 @@
+services:
+  api:
+    image: ghcr.io/isaacnilsonviana/mlops-api:latest
+    ports:
+      - "8003:8000"
+    volumes:
+      - ./modelo:/app/modelo
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD-SHELL", "curl -f http://localhost:8000/health || exit 1"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
